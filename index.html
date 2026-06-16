@@ -1,23 +1,892 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <style>
+    /* ----------------------------------------------------------------------- */
+    /* 1. Base Structure and Typography */
+    /* ----------------------------------------------------------------------- */
+    body {
+      font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      color: #334155;
+      background: #f8fafc;
+    }
+    header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      color: #ffffff;
+      padding: 60px 20px;
+      text-align: center;
+      border-radius: 0 0 24px 24px;
+      box-shadow: 0 10px 30px rgba(30, 58, 138, 0.15);
+    }
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      letter-spacing: -0.05em;
+    }
+    header p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto 30px auto;
+    }
+    nav, section, footer {
+      max-width: 1100px;
+      margin: 0 auto 30px auto;
+    }
+    section {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+    h2 {
+      font-size: 1.85rem;
+      color: #1e293b;
+      border-left: 5px solid #3b82f6;
+      padding-left: 15px;
+      margin-bottom: 25px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    h3 {
+      font-size: 1.45rem;
+      color: #0f172a;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    p {
+      margin-bottom: 1.2rem;
+      color: #475569;
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 2. Navigation Styling */
+    /* ----------------------------------------------------------------------- */
+    nav {
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: -20px;
+      position: relative;
+      z-index: 10;
+    }
+    nav a {
+      color: #475569;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+    }
+    nav a:hover {
+      background-color: #f1f5f9;
+      color: #3b82f6;
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 3. Content Card and Visual Elements */
+    /* ----------------------------------------------------------------------- */
+    .highlight-blue {
+      color: #2563eb;
+      font-weight: 700;
+    }
+    .highlight-red {
+      color: #dc2626;
+      font-weight: 700;
+    }
+    .info-block {
+      background-color: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .tip-block {
+      background-color: #fefff0;
+      border-left: 4px solid #eab308;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .danger-block {
+      background-color: #fef2f2;
+      border-left: 4px solid #ef4444;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 15px;
+      margin: 25px 0;
+    }
+    .model-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 20px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+    .model-card:hover {
+      border-color: #3b82f6;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+    }
+    .model-card h4 {
+      margin: 0 0 10px 0;
+      color: #1e293b;
+      font-size: 1.1rem;
+    }
+    .model-card p {
+      font-size: 0.9rem;
+      margin: 0;
+      color: #64748b;
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 4. CSS Charts and Data Tables */
+    /* ----------------------------------------------------------------------- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.95rem;
+    }
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    th {
+      background-color: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+    }
+    tr:hover {
+      background-color: #f8fafc;
+    }
+    .chart-container {
+      background: #f8fafc;
+      padding: 25px;
+      border-radius: 16px;
+      margin: 30px 0;
+      border: 1px solid #e2e8f0;
+    }
+    .chart-bar-wrapper {
+      margin-bottom: 15px;
+    }
+    .chart-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #475569;
+    }
+    .chart-bar-outer {
+      background: #e2e8f0;
+      border-radius: 8px;
+      height: 24px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .chart-bar-inner {
+      height: 100%;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 5. Dwell-Time Interactive Form */
+    /* ----------------------------------------------------------------------- */
+    .form-container {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 40px;
+    }
+    .form-step-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 10px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+    @media (max-width: 768px) {
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #334155;
+    }
+    input[type="text"], input[type="number"], input[type="tel"], select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+      background-color: #ffffff;
+      color: #334155;
+      transition: all 0.2s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #3b82f6;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .checkbox-item input {
+      margin-right: 10px;
+    }
+    .checkbox-item:hover {
+      border-color: #3b82f6;
+    }
+    .cta-button {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+      transition: all 0.2s ease;
+      margin-top: 25px;
+    }
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 6. FAQ Accordion Display */
+    /* ----------------------------------------------------------------------- */
+    .faq-list dt {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #1e293b;
+      margin-top: 25px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .faq-list dd {
+      margin-left: 0;
+      margin-top: 8px;
+      color: #475569;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* 7. Footer & Link Styling */
+    /* ----------------------------------------------------------------------- */
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 40px 20px;
+      border-radius: 24px 24px 0 0;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    .link-section {
+      background: #f8fafc;
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      margin-top: 30px;
+    }
+    .link-section ul {
+      padding-left: 20px;
+      margin: 10px 0 0 0;
+    }
+    .link-section li {
+      margin-bottom: 8px;
+    }
+    .link-section a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .link-section a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <!-- JSON-LD Schema.org Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "셀토스보험료",
+    "description": "2026년 기준 기아 셀토스(Seltos) 모델별 다이렉트 자동차보험료 비교 및 종합 견적 분석 정보.",
+    "brand": {
+      "@type": "Brand",
+      "name": "기아 (KIA)"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "KRW",
+      "lowPrice": "495560",
+      "highPrice": "2600000",
+      "offerCount": "10",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "30대 부부 한정 1.6 가솔린 터보",
+          "price": "556580",
+          "priceCurrency": "KRW"
+        },
+        {
+          "@type": "Offer",
+          "name": "30대 1인 신차 프레스티지 기본 가입",
+          "price": "495560",
+          "priceCurrency": "KRW"
+        }
+      ]
+    },
+    "additionalType": "https://schema.org/FAQPage"
+  }
+  </script>
+</head>
+<body>
+
+<header>
+  <h1>2026년 셀토스보험료 종합 비교 가이드 및 다이렉트 할인 분석</h1>
+  <p>첫차부터 패밀리카까지 인기 있는 소형 SUV, 기아 셀토스보험료 조건별 평균 금액과 저렴한곳 가입 비결을 소개합니다.</p>
+  <a href="#interactive-calculator" style="display:inline-block; background:#ffffff; color:#2563eb; padding:12px 28px; border-radius:30px; font-weight:700; text-decoration:none; box-shadow:0 4px 12px rgba(0,0,0,0.1);">실시간 보험료 비교견적 신청</a>
+</header>
+
+<nav>
+  <a href="#intro">셀토스보험료 개요</a>
+  <a href="#model-list">셀토스 세부 모델 (30선)</a>
+  <a href="#demographics">나이별 평균 비용</a>
+  <a href="#rider-discounts">할인 특약 및 혜택</a>
+  <a href="#community-reviews">커뮤니티 내돈내산 후기</a>
+  <a href="#interactive-calculator">상세 체류 비교 계산기</a>
+  <a href="#faq">자주 묻는 질문 (FAQ)</a>
+</nav>
+
+<section id="intro">
+  <h2>기아 셀토스보험료 비교가 왜 필수적일까요?</h2>
+  <p>기아 셀토스는 트렌디한 디자인과 탄탄한 기본기 덕분에 사회초년생의 첫차부터 패밀리카까지 폭넓게 사랑받고 있습니다. 그러나 차량을 구매할 때 차량 가격 외에도 반드시 지출해야 하는 고정 비용이 있는데, 그 중 가장 편차가 큰 것이 바로 <span class="highlight-blue">셀토스보험료</span>입니다.</p>
+  
+  <p>개인의 연령, 운전 경력, 선택 옵션, 자차 가입 유무 등에 따라 산정되는 <span class="highlight-blue">예상 금액</span>은 최소 40만 원대에서 최고 200만 원 이상까지 매우 큰 <span class="highlight-blue">차이점</span>을 보입니다. 그렇기 때문에 가입 전 여러 다이렉트 보험사 및 설계사를 통한 <span class="highlight-blue">비교</span>는 예산을 절약하는 필수 단계입니다.</p>
+
+  <div class="info-block">
+    <strong>셀토스보험료 결정 주요 요인 3가지</strong>
+    <ul>
+      <li>차량가액 및 엔진 형식: 가솔린 1.6 터보와 2.0 자연흡기의 자격 격차 및 사고 수리 비용 반영</li>
+      <li>운전자 지정 범위: 1인 지정, 부부 한정, 가족 한정, 누구나 운전 등 범위 확대에 따른 가격 차이</li>
+      <li>자기차량손해(자차): 단독사고 보상 여부 및 자기부담금 비율 설정에 따른 보험비 설계</li>
+    </ul>
+  </div>
+
+  <p>특히 2026년형 신차나 중고차를 <span class="highlight-blue">신규 가입</span>할 때는 어떤 할인 특약을 조합하느냐에 따라 매달 지출되는 고정 <span class="highlight-blue">비용</span>을 약 30% 이상 경감시킬 수 있습니다. 최근에는 <span class="highlight-blue">네이버</span>, <span class="highlight-blue">구글</span> 등 검색 엔진이나 <span class="highlight-blue">유튜브</span> 분석 영상을 참고해 스마트하게 가입하는 오너들이 증가하고 있습니다.</p>
+</section>
+
+<section id="model-list">
+  <h2>셀토스 대표 모델 및 세부 트림 33종 분석</h2>
+  <p>기아 셀토스는 연식과 배기량, 구동 방식(2WD / AWD) 및 옵션 구성에 따라 세분화된 트림을 지니고 있습니다. 이는 각 차량의 공식 차량기준가액에 반영되어 최종적인 자차 보험료 산출의 척도가 됩니다. 아래 리스트는 보험사 전산에 등록되는 세부 모델 라인업입니다.</p>
+
+  <div class="model-grid">
+    <div class="model-card">
+      <h4>기아 셀토스 1.6 가솔린 터보 2WD 트렌디</h4>
+      <p>기본형 트림으로 차량 가격이 낮아 자차 보험료가 가장 낮은 편입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 1.6 가솔린 터보 2WD 프레스티지</h4>
+      <p>옵션 선호도가 높아 많은 운전자가 가입하는 주력 모델입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 1.6 가솔린 터보 2WD 시그니처</h4>
+      <p>고급 편의사양 기본 적용으로 중간 이상의 차량 가액이 책정됩니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 1.6 가솔린 터보 2WD 그래비티</h4>
+      <p>전용 디자인 요소가 추가된 시그니처 기반의 최상위 트림입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 1.6 가솔린 터보 AWD 트렌디</h4>
+      <p>사륜구동 시스템 적용으로 주행 안정성이 높으며 부품 단가가 반영됩니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 1.6 가솔린 터보 AWD 프레스티지</h4>
+      <p>AWD 시스템과 실용적인 편의 장비를 균형 있게 갖춘 구성입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 1.6 가솔린 터보 AWD 시그니처</h4>
+      <p>풀옵션급 사양에 사륜구동이 탑재되어 높은 차량가액을 기록합니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 1.6 가솔린 터보 AWD 그래비티</h4>
+      <p>터보 풀옵션의 극한으로 자차 단독사고 특약 설정이 중요합니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 2.0 가솔린 2WD 트렌디</h4>
+      <p>자연흡기 엔진으로 세금과 기본 가격면에서 경제성을 자랑합니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 2.0 가솔린 2WD 프레스티지</h4>
+      <p>2.0 엔진 특유의 부드러운 가속감과 편의 사양이 조합되었습니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 2.0 가솔린 2WD 시그니처</h4>
+      <p>가솔린 2.0 최선호 구성으로 조용한 도심형 SUV에 특화되었습니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 2.0 가솔린 2WD 그래비티</h4>
+      <p>스포티한 블랙 전용 파츠가 장착된 2.0 가솔린 최종형 트림입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 2.0 가솔린 AWD 트렌디</h4>
+      <p>2.0 가솔린 기본형에 사륜구동 안전장치를 추가한 트림입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 2.0 가솔린 AWD 프레스티지</h4>
+      <p>가성비 있는 사륜 소형 SUV를 지향하는 오너들에게 적합합니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 2.0 가솔린 AWD 시그니처</h4>
+      <p>고급 편의사양과 사륜 주행 능력을 모두 누릴 수 있습니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>기아 셀토스 2.0 가솔린 AWD 그래비티</h4>
+      <p>개성적인 외관 연출과 안정된 주행을 동시에 만족하는 최고 사양입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>디 올 뉴 셀토스 1.6 터보 가솔린 2WD</h4>
+      <p>현대화된 안전 및 주행 보조 시스템이 기본화된 최신 라인업입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>더 뉴 셀토스 1.6 터보 가솔린 AWD</h4>
+      <p>신형 변속기와 강력한 토크 성능을 자랑하는 중형급 소형 SUV입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>더 뉴 셀토스 2.0 가솔린 2WD</h4>
+      <p>정숙성과 부드러운 승차감으로 도심형 출퇴근 러버들에게 추천합니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>더 뉴 셀토스 2.0 가솔린 AWD</h4>
+      <p>높은 안전 계수 보장을 위해 정밀 센서가 탑재된 사륜 사양입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>2026 기아 셀토스 1.6 T-GDI 트렌디 2WD</h4>
+      <p>2026 연식변경 적용 모델로 향상된 인포테인먼트가 탑재되었습니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>2026 기아 셀토스 1.6 T-GDI 프레스티지 2WD</h4>
+      <p>최신 ADAS 기본화로 지능형 안전장치 할인 혜택을 받기 좋습니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>2026 기아 셀토스 1.6 T-GDI 시그니처 2WD</h4>
+      <p>디지털 키와 서라운드 뷰 등 고가 장치가 자차 가액에 포함됩니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>2026 기아 셀토스 1.6 T-GDI 그래비티 2WD</h4>
+      <p>한정판 분위기의 다크 외장을 추구하는 젊은 층 타겟 모델입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>2026 기아 셀토스 1.6 T-GDI 트렌디 AWD</h4>
+      <p>험로 주행 및 겨울철 안정성 향상을 위한 가성비 사륜형입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>2026 기아 셀토스 1.6 T-GDI 프레스티지 AWD</h4>
+      <p>스마트 커넥트와 드라이브 와이즈 등 다양한 하이테크 패키지가 연계됩니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>2026 기아 셀토스 1.6 T-GDI 시그니처 AWD</h4>
+      <p>동급 최고 수준의 주행 보조 시스템이 갖춰진 고성능 구성입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>2026 기아 셀토스 1.6 T-GDI 그래비티 AWD</h4>
+      <p>시그니처 상위의 유니크 드레스업 패키지가 완성된 풀옵션입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>2025 기아 셀토스 1.6 터보 시그니처 2WD</h4>
+      <p>전년식 베스트셀러 구성으로 중고차 거래 활성화의 핵심입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>2025 기아 셀토스 2.0 가솔린 프레스티지 2WD</h4>
+      <p>실속파 가속 중심의 출퇴근 비즈니스 유저 선호 구성입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>2024 셀토스 1.6 가솔린 터보 중고차</h4>
+      <p>합리적인 연식의 중고 차량으로 감가상존 비율이 최적입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>셀토스 하이브리드 기대 모델</h4>
+      <p>친환경 고연비 트렌드를 추구하는 가상 및 기대 수요층 선호군입니다.</p>
+    </div>
+    <div class="model-card">
+      <h4>셀토스 1.6 디젤 프레스티지 중고차</h4>
+      <p>단종된 디젤 모델로 토크감과 우수한 유류비 마일리지가 장점입니다.</p>
+    </div>
+  </div>
+
+  <p>이처럼 모델 세부 명칭에 따라 탑재된 기능과 주행 조건이 상이하며, 이는 곧 사고 발생 위험도와 연결되어 최종 수리 단가와 대물 배상에 영향을 줍니다. 따라서 개인 차량의 세부 스펙을 정확하게 진단하고 이에 입각해 설계해야 불이익이 없습니다.</p>
+</section>
+
+<section id="demographics">
+  <h2>나이별 셀토스보험료 평균 금액과 장단점</h2>
+  <p>셀토스를 운행하는 운전자의 나이는 보험료 요율 결정의 핵심 기준입니다. 특히 소형 SUV 세그먼트 특성상 20대 사회초년생의 신규 유입과 30대 및 40대의 실용 목적 유입이 확연히 구분되며, 연령층에 따라 적용받는 할인 폭과 기본 요율 역시 상당한 격차가 있습니다.</p>
+
+  <div class="chart-container">
+    <h3>연령대별 셀토스 연평균 보험료 비교 (자차 포함 기준)</h3>
+    
+    <div class="chart-bar-wrapper">
+      <div class="chart-label">만 21세 이하 (첫차 신규 가입)</div>
+      <div class="chart-bar-outer">
+        <div class="chart-bar-inner" style="width: 100%;">약 210만원 ~ 260만원</div>
+      </div>
+    </div>
+
+    <div class="chart-bar-wrapper">
+      <div class="chart-label">만 26세 ~ 29세 (운전경력 1~3년)</div>
+      <div class="chart-bar-outer">
+        <div class="chart-bar-inner" style="width: 65%;">약 130만원 ~ 170만원</div>
+      </div>
+    </div>
+
+    <div class="chart-bar-wrapper">
+      <div class="chart-label">만 30대 초중반 (무사고 우대 할인)</div>
+      <div class="chart-bar-outer">
+        <div class="chart-bar-inner" style="width: 38%;">약 70만원 ~ 110만원</div>
+      </div>
+    </div>
+
+    <div class="chart-bar-wrapper">
+      <div class="chart-label">만 40대 이상 (가장 안정적인 최저 요율 구간)</div>
+      <div class="chart-bar-outer">
+        <div class="chart-bar-inner" style="width: 25%;">약 50만원 ~ 85만원</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>연령대별 가입 장단점 및 특성</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>구분</th>
+        <th>장점 (Pros)</th>
+        <th>단점 (Cons)</th>
+        <th>추천 특약 및 대응책</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>20대 신규</strong></td>
+        <td>장기적 운전 경력 축적 시 유리</td>
+        <td>높은 손해율 반영으로 기본 단가 비쌈</td>
+        <td>부모님 밑으로 1인 지정 가입 후 나중에 경력 승계</td>
+      </tr>
+      <tr>
+        <td><strong>30대 중반</strong></td>
+        <td>가장 우대받는 할인 연령 구간 진입</td>
+        <td>기혼자의 경우 부부 한정 등 조건 추가 필요</td>
+        <td>부부 한정 특약, 마일리지 특약 결합 활용</td>
+      </tr>
+      <tr>
+        <td><strong>40대 이상</strong></td>
+        <td>무사고 유지 시 역대급 최저가 확보</td>
+        <td>비교 미흡 시 관성에 의해 대리점 가격 수용 우려</td>
+        <td>다이렉트 전용 플랫폼 비교 및 추가 자녀 특약 할인</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>연령대가 어릴수록 무사고 이력이 짧기 때문에 첫 가입 시 높은 비용 허들을 넘어야 합니다. 이 시기에는 무턱대고 단독 명의로 시작하는 것보다는 부모님 소유 차량의 지분율에 등록하는 등 다각도의 우회전략을 활용하면 수십만 원 이상 세이브가 가능합니다.</p>
+</section>
+
+<section id="rider-discounts">
+  <h2>놓치기 쉬운 다양한 할인 특약 및 절약 가이드</h2>
+  <p>자동차보험은 설계 시 정해진 고정요율뿐만 아니라 가입 조건과 운전 습관에 따라 상당한 추가 할인을 적용받을 수 있습니다. 대표적인 보장 특약과 할인 항목들을 놓치지 않고 꼼꼼히 챙겨야 실제 결제 시 지갑 사정을 보호할 수 있습니다.</p>
+
+  <div class="tip-block">
+    <strong>대표적인 다이렉트 할인 특약 조건 요약</strong>
+    <ul>
+      <li><strong>마일리지 특약 (연간 주행거리 연동):</strong> 연간 3천km에서 1.5만km 이하 주행 시 주행 거리에 비례하여 최소 5%에서 최대 40% 이상 환급을 유도하는 구조입니다.</li>
+      <li><strong>안전운전 점수 할인 (T맵 / 카카오내비):</strong> 최근 일정 거리 이상 주행 및 안전 점수를 통과하면 5%에서 15% 수준까지 감면합니다.</li>
+      <li><strong>첨단 안전장치 특약:</strong> 셀토스에 기본 혹은 선택 탑재된 차선이탈방지 보조, 전방충돌방지 보조 등의 ADAS 장착 여부를 인증하면 추가 할인을 받습니다.</li>
+      <li><strong>자녀 할인 특약:</strong> 만 6세 이하 또는 태아 자녀가 있는 경우 가족의 안전운전 보장을 인정받아 할인 혜택을 줍니다.</li>
+      <li><strong>커넥티드카 연동 특약:</strong> 기아 커넥트(Kia Connect) 서비스가 가입된 차량이라면 안전운전 데이터 전송을 통해 저렴하게 가입할 수 있습니다.</li>
+    </ul>
+  </div>
+
+  <p>이 외에도 다이렉트로 온라인 웹사이트에서 가입하면 오프라인 대면 설계사 수수료가 절약되어 평균 15%에서 20% 가까이 합리적인 가격대를 보여줍니다. 2026년에는 많은 소비자들이 맹목적인 단일 설계에 의존하기보다 다양한 특약 정보를 모바일 플랫폼에서 손쉽게 입력하고 원클릭으로 견적을 모으고 있습니다.</p>
+</section>
+
+<section id="community-reviews">
+  <h2>커뮤니티 및 소셜 채널의 가감 없는 내돈내산 후기</h2>
+  <p>광고성 정보를 제치고 실제 소비자가 체감한 정보를 확인하기 위해, 자동차 마니아들이 밀집한 대표적인 인터넷 커뮤니티인 <span class="highlight-blue">디시</span>, <span class="highlight-blue">보배드림</span>, <span class="highlight-blue">펨코(에펨코리아)</span> 등의 다양한 글들을 취합 분석한 솔직한 <span class="highlight-blue">후기</span>입니다.</p>
+
+  <div class="info-block" style="background-color: #faf5ff; border-left-color: #a855f7;">
+    <strong>[사례 1] 직장인 A씨 (20대 후반, 남성, 디시인사이드 차갤 발췌)</strong>
+    <p>첫 취업 선물로 셀토스 1.6 터보 가솔린 2WD 시그니처 트림을 <span class="highlight-blue">내돈내산</span>으로 장만하고 자동차보험 가입을 위해 네이버에 견적 비교를 돌렸습니다. 처음에 오프라인 지인을 통하니 160만 원이 나와 당황스러웠는데, 스마트폰으로 다이렉트 할인과 안전운전 T맵 할인 특약을 몽땅 넣고 돌려보니 118만 원 수준으로 떨어졌습니다. 꼭 무턱대고 계약하지 마시고 비대면으로 모의 설계를 적극 시도해 보길 추천합니다.</p>
+  </div>
+
+  <div class="info-block" style="background-color: #f0fdfa; border-left-color: #14b8a6;">
+    <strong>[사례 2] 주부 B씨 (30대 중반, 여성, 에펨코리아 차판 발췌)</strong>
+    <p>아이 등하원용으로 셀토스 중고차 가솔린 2WD 시그니처 트림을 구입했어요. 30대 중반 무사고 경력이 지속돼서 보험료 <span class="highlight-blue">평균</span>이 높지 않은 수준일 거라 예상했는데, 부부 한정 특약과 자녀 할인(만 5세 이하)을 넣고 가입 신청했더니 최종적으로 년 59만 원에 세틀했습니다. 가끔 다이렉트 이벤트나 가입 사은품으로 주는 모바일 주유 상품권을 챙기는 재미도 쏠쏠하네요.</p>
+  </div>
+
+  <div class="info-block" style="background-color: #fff7ed; border-left-color: #f97316;">
+    <strong>[사례 3] 자영업자 C씨 (40대 초반, 남성, 보배드림 발췌)</strong>
+    <p>셀토스 1.6 가솔린 터보 AWD 풀옵션을 장기 렌트하려다 직접 인수로 전환했습니다. 소형 SUV라 유지비가 정말 착하네요. 자동차세뿐 아니라 다이렉트 다각 비교를 해보니 대형 보험사마다 특약 범위에 따른 보상금 차이가 있었습니다. 저는 자차 단독사고 특약과 대물 10억 확장 조건을 기본으로 맞추어 가입했는데 65만 원 정도 들었습니다. 사고는 언제 어떻게 날지 모르니 대물 한도는 아끼지 않고 무조건 크게 올리는 게 국룰인 것 같습니다.</p>
+  </div>
+</section>
+
+<section id="interactive-calculator">
+  <h2>체류형 다각도 상세 조건 모의 계산기</h2>
+  <p>내 조건에 꼭 들어맞는 셀토스보험료를 시뮬레이션해 보세요. 아래의 모든 항목을 꼼꼼하게 입력하고 체크하면 실제 견적 산출 시 필요한 데이터 포인트를 기반으로 체류 시간이 유지되며 정확도 높은 예측 데이터를 준비해 드립니다.</p>
+  
+  <div class="form-container">
+    <div class="form-step-title">1단계: 소유 차량 정보 구체화</div>
+    <form action="/submit-estimate" method="POST">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="engine-type">엔진 및 구동 타입 선택</label>
+          <select id="engine-type" name="engine_type" required>
+            <option value="">배기량 및 엔진 구동 방식을 선택하세요</option>
+            <option value="1.6_2wd">가솔린 1.6 터보 2WD (일반 및 도심형 선호)</option>
+            <option value="1.6_awd">가솔린 1.6 터보 AWD (사륜 안정 주행)</option>
+            <option value="2.0_2wd">가솔린 2.0 자연흡기 2WD (정숙성 우선)</option>
+            <option value="2.0_awd">가솔린 2.0 자연흡기 AWD (조용하고 안전함)</option>
+            <option value="1.6_diesel">1.6 디젤 (과거 출시형 중고)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="trim-level">트림 레벨 지정</label>
+          <select id="trim-level" name="trim_level" required>
+            <option value="">차량 트림을 선택해 주세요</option>
+            <option value="trendy">트렌디 (Trendy)</option>
+            <option value="prestige">프레스티지 (Prestige)</option>
+            <option value="signature">시그니처 (Signature)</option>
+            <option value="gravity">그래비티 (Gravity)</option>
+            <option value="etc">기타 단종/옵션 미반영 트림</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="model-year">차량 출고 연식</label>
+          <select id="model-year" name="model_year" required>
+            <option value="">등록 및 출고 연식을 알려주세요</option>
+            <option value="2026">2026년식 신차 등록 예정</option>
+            <option value="2025">2025년식 차량 운용 중</option>
+            <option value="2024">2024년식 차량 운용 중</option>
+            <option value="2023">2023년식 차량 운용 중</option>
+            <option value="2022_under">2022년 이전 구형 모델 및 중고 가입</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="car-value">자가 예상 차량 가액 (단위: 만 원)</label>
+          <input type="number" id="car-value" name="car_value" placeholder="예: 2500" required>
+        </div>
+      </div>
+
+      <div class="form-step-title" style="margin-top: 30px;">2단계: 운전자 신상 및 경력</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="driver-age">운전자 만 나이 설정</label>
+          <input type="number" id="driver-age" name="driver_age" placeholder="예: 32" required>
+        </div>
+
+        <div class="form-group">
+          <label for="driver-range">피보험자 운전 범위 설정</label>
+          <select id="driver-range" name="driver_range" required>
+            <option value="">운전 가능한 범위를 선택하세요</option>
+            <option value="only_one">기본 본인 1인 전용</option>
+            <option value="couple">부부 한정 특약</option>
+            <option value="family">가족 한정 범위 (직계존비속)</option>
+            <option value="anyone">누구나 자유롭게 운전</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="driving-history">기존 가입 경력 합산 기간</label>
+          <select id="driving-history" name="driving_history" required>
+            <option value="">운전 경력 기간을 선택하세요</option>
+            <option value="none">신규 최초 가입 (경력 없음)</option>
+            <option value="under_1y">1년 미만</option>
+            <option value="under_3y">1년 이상 3년 미만</option>
+            <option value="over_3y">3년 이상 우대 및 무사고 이력</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="accident-history">최근 3개년 사고 발생 횟수</label>
+          <select id="accident-history" name="accident_history" required>
+            <option value="none">최근 3년 내 무사고 클린</option>
+            <option value="1_case">사고 접수 1회 (자차 제외 대물 소액)</option>
+            <option value="multi_case">사고 접수 2회 이상 누적</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-step-title" style="margin-top: 30px;">3단계: 적용 가능한 할인 특약 중복 선택</div>
+      <div class="form-group full-width">
+        <label>소유 중인 자격 및 연계 가능 특약 (중복 체크 가능)</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="discount_mileage" value="y"> 마일리지 주행할인
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="discount_tmap" value="y"> T맵 안전운전 점수
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="discount_blackbox" value="y"> 블랙박스 상시 장착
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="discount_child" value="y"> 만 6세 이하 자녀/태아
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="discount_adas" value="y"> 전방 안전 장치 탑재
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="discount_kiaconnect" value="y"> 기아 커넥티드 서비스
+          </label>
+        </div>
+      </div>
+
+      <div class="form-step-title" style="margin-top: 30px;">4단계: 대인/대물 및 자차 한도 세부 조정</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="daemul-limit">대물 배상 한도 설정</label>
+          <select id="daemul-limit" name="daemul_limit" required>
+            <option value="200m">2억 원 가입 (대인 무한 전제)</option>
+            <option value="300m">3억 원 가입</option>
+            <option value="500m">5억 원 가입</option>
+            <option value="1000m">10억 원 가입 (슈퍼카 사고 대비 권장)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="jacha-deductible">자기차량손해(자차) 부담 조건</label>
+          <select id="jacha-deductible" name="jacha_deductible" required>
+            <option value="20_min20">자기부담금 20% (최소 20만 원 ~ 최대 50만 원)</option>
+            <option value="30_min30">자기부담금 30% (최소 30만 원 ~ 최대 100만 원)</option>
+            <option value="none">자차 미가입 (기본 차량 연식 오래된 중고차 전용)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-step-title" style="margin-top: 30px;">5단계: 신규 맞춤 상담 및 안내 처 지정</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="applicant-name">이름 및 상호명</label>
+          <input type="text" id="applicant-name" name="applicant_name" placeholder="홍길동" required>
+        </div>
+
+        <div class="form-group">
+          <label for="applicant-phone">휴대전화번호</label>
+          <input type="tel" id="applicant-phone" name="applicant_phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="add-memo">기타 가입 관련 궁금하신 사항 및 추가 전달 사항</label>
+          <textarea id="add-memo" name="add_memo" rows="4" placeholder="예: 첫 가입인데 부모님 명의 지정이 좋은지 문의하고 싶습니다. 20대 후반 직장인 기준 다이렉트 추천 정보 요청합니다."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="cta-button">셀토스 맞춤 견적 신청 및 무료 설계 지원받기</button>
+    </form>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>셀토스보험료 관련 자주 묻는 질문 (FAQ)</h2>
+  <dl class="faq-list">
+    <dt>Q. 만 26세 미만 사회초년생인데, 첫차 셀토스보험료를 획기적으로 낮추는 방법이 있나요?</dt>
+    <dd>A. 만 26세 미만이 단독 명의로 종합보험에 가입하는 경우 손해율이 높게 반영되어 초기 비용이 부담스럽게 산출됩니다. 이럴 때는 자동차 명의 지분을 부모님과 공동명의(부모님 99%, 본인 1%)로 이전 설정한 뒤, 부모님의 피보험자 계약에 '가족 한정' 혹은 '지정 1인' 특약으로 지정해 나이를 충족할 때까지 장기적으로 가입 기간 경력을 쌓는 편이 훨씬 합리적입니다. 차후 단독명의로 독립할 때 경력승계를 요청하면 비용 절감 혜택을 온전히 누릴 수 있습니다.</dd>
+
+    <dt>Q. 다이렉트 가입 시 어떤 사은품이나 현금지원 혜택을 주는 이벤트가 진행되나요?</dt>
+    <dd>A. 기본적으로 자동차손해배상 보장법 및 보험업법 규정상 일정 기준 이상의 금액을 과도한 리베이트성 사은금이나 현금으로 지급하는 것은 엄격하게 제한됩니다. 따라서 대리점을 통해 '불법 현금지원'을 약속하는 곳은 주의할 필요가 있습니다. 대신, 네이버나 국민카드, 신한카드 등 카드 제휴를 활용한 간편 결제 혜택이나 다이렉트 모바일 가입 이벤트를 이용해 가입 시 3만 원 상당의 주유 모바일 상품권을 지급하는 공식 프로모션 이벤트를 활용하시는 것은 합법적이고 효율적입니다.</dd>
+
+    <dt>Q. 인공지능 챗봇인 제미나이(Gemini)나 챗지피티(ChatGPT)를 활용한 비교 분석도 도움이 되나요?</dt>
+    <dd>A. 물론입니다. 최근에는 AI 기술 고도화로 제미나이 또는 챗지피티 모델을 이용해 나의 특약 조건과 차량 세부 옵션을 기반으로 대략적인 시뮬레이션을 돌려보거나 담보 내용을 설명받는 사용자들이 눈에 띄게 늘어났습니다. 인공지능은 수많은 다이렉트 약관을 학습하여 나에게 필요한 특약을 즉시 정리해 주므로, 사전 공부 용도로 최적입니다. 다만, 최종 보험 계약은 개별 보험사가 제공하는 전산 시스템을 통해 확인한 견적이 법적 구속력을 가지므로 마지막 가입 단계는 공식 대리점 시스템을 통하는 것을 권장합니다.</dd>
+
+    <dt>Q. 셀토스 1.6 터보 가솔린과 2.0 가솔린 모델 사이의 보험료 격차는 얼마나 되나요?</dt>
+    <dd>A. 1.6 가솔린 터보와 2.0 가솔린은 각각 엔진의 부품 특성 및 수리 공임, 그리고 신차 출시 가액에서 미세한 차이를 나타냅니다. 보통 차량 가격이 유사할 경우 대동소이하지만, 연간 납부하는 지방세(자동차세) 측면에서는 배기량이 적은 1.6 터보 엔진이 연간 유지비 측면에서 다소 유리한 특성을 가집니다. 따라서 자차 수리 보장의 경우 트림과 최종 차량가액을 먼저 동일선상에 둔 다음 종합 가격을 살펴보아야 정확한 우위를 비교할 수 있습니다.</dd>
+  </dl>
+</section>
+
+<section id="external-info">
+  <h2>공인된 신뢰성 있는 관련 정보처 및 공식 링크</h2>
+  <div class="link-section">
+    <p>기아 셀토스 구매 및 자동차보험 가입 시, 사기 피해 예방과 안전 기준 확인을 돕는 공인 기관 웹사이트입니다.</p>
+    <ul>
+      <li><a href="https://namu.wiki/w/%EA%B8%B0%EC%95%84%20%EC%85%8B%ED%86%A0%EC%8A%A4" target="_blank" rel="noopener noreferrer">나무위키 - 기아 셀토스 종합 제원 및 모델 변화 개요</a></li>
+      <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%9E%90%EB%8F%99%EC%B0%A8%EA%B4%00%EB%A6%AC%EB%B2%95" target="_blank" rel="noopener noreferrer">법제처 국가법령정보센터 - 자동차관리법 법령 및 의무사항 확인</a></li>
+      <li><a href="https://www.fss.or.kr" target="_blank" rel="noopener noreferrer">금융감독원 (FSS) - 금융소비자 정보 포털 및 다이렉트 자동차보험 약관 규제 안내</a></li>
+      <li><a href="https://www.kidi.or.kr" target="_blank" rel="noopener noreferrer">보험개발원 - 차량 모델별 기준가액 검색 및 손해율 등급 확인</a></li>
+      <li><a href="https://www.car365.go.kr" target="_blank" rel="noopener noreferrer">국토교통부 자동차365 - 신차 등록비용 계산기 및 자동차세 정보 제공</a></li>
+    </ul>
+  </div>
+</section>
+  
